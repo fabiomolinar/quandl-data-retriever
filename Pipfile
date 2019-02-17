@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-quandl = "==3.4.6"
+twisted = {extras = ["tls"],version = "==18.9.0"}
 
 [requires]
 python_version = "3.6.7"
