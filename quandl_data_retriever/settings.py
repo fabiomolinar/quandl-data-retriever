@@ -1,5 +1,6 @@
 import os
 
+FORGEONE_API_KEY = os.environ.get("FORGEONE_KEY", "")
 QUANDL_API_KEY = os.environ.get("QUANDL_KEY", "")
 QUANDL_API_ENDPOINT = {
     "scheme": "https",

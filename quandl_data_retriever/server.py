@@ -5,12 +5,14 @@ Authenticated users have a limit of 300 calls per 10 seconds,
 2,000 calls per 10 minutes and a limit of 50,000 calls per day.
 """
 import urllib
-from twisted.internet import reactor
-from twisted.web.client import Agent
 
-import settings
+from twisted.internet import reactor
+from twisted.web.client import Agent, readBody
+
+from . import settings
 
 API_KEY = settings.QUANDL_API_KEY
+
 
 def main():
     uri = urllib.parse.urlunparse((
@@ -25,12 +27,18 @@ def main():
     ))
     agent = Agent(reactor)
     d = agent.request(
-        "GET",
-        str.encode(uri)
+        b"GET",
+        str.encode(uri, 'ascii')
     )
     
     def cbResponse(response):
-        print("called")
+        if response.code == 200:
+            def cbBody(body):
+                # do something with JSON
+                pass
+            d = readBody(response)
+            d.addCallback(cbBody)
+            return d
     d.addCallback(cbResponse)
     
     def cbShutdown(ignored):
@@ -38,3 +46,6 @@ def main():
     d.addBoth(cbShutdown)
 
     reactor.run()
+
+if __name__ == "__main__":
+    main()
