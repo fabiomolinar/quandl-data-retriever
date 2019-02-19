@@ -1,4 +1,3 @@
-from . import settings
 from . import server
 
 if __name__ == "__main__":

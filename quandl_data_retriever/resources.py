@@ -13,7 +13,7 @@ class Resource(abc.ABC):
         pass
 
 class ForgeOne(Resource):
-    def __init__(self,key):
+    def __init__(self, key):
         self.API_KEY = key
 
     API_ENDPOINT = {
@@ -42,6 +42,17 @@ class ForgeOne(Resource):
             ""
         ))
         return unparsed
+
+    @staticmethod
+    def save(data):
+        pass
+
+class Quandl(ForgeOne):
+    API_ENDPOINT = {
+        "scheme": "https",
+        "netloc": "www.quandl.com",
+        "path": "/api/v3/"
+    }
 
     @staticmethod
     def save(data):

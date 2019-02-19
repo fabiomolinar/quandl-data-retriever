@@ -21,5 +21,22 @@ class TestForgeOne(unittest.TestCase):
             with self.subTest(msg=s):
                 self.assertEqual(forge_one.get_url(s), result)
 
+class TestQuandl(unittest.TestCase):    
+    def test_get_url(self):
+        strings = [
+            "https://www.quandl.com/api/v3/datasets/XBRU/VAN?column_index=1&api_key=mysecretapikey",
+            "https://www.quandl.com/api/v3/datasets/XBRU/VAN?column_index=1",
+            "https://www.quandl.com/api/v3/datasets/XBRU/VAN?column_index=1&",
+            "/api/v3/datasets/XBRU/VAN?column_index=1",
+            "datasets/XBRU/VAN?column_index=1",
+            "datasets/XBRU/VAN?column_index=1&api_key=mysecretapikey"
+        ]
+        result = "https://www.quandl.com/api/v3/datasets/XBRU/VAN?column_index=1&api_key=mysecretapikey"
+        api_key = "mysecretapikey"
+        quandl = resources.Quandl(api_key)
+        for s in strings:
+            with self.subTest(msg=s):
+                self.assertEqual(quandl.get_url(s), result)
+
 if __name__ == "__main__":
     unittest.main()
