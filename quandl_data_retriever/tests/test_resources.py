@@ -38,5 +38,31 @@ class TestQuandl(unittest.TestCase):
             with self.subTest(msg=s):
                 self.assertEqual(quandl.get_url(s), result)
 
+    def test_save(self):
+        strings = [
+            """<html>
+                <head>
+                    <script type="text/javascript">
+                        /* A comment */
+                        var aVariable = 922099414;
+                        var anObject {"asd": "asd"}
+                    </script>
+                </head>
+                <body>
+                    <pre>
+                        {"found_object": true}
+                    </pre>
+                </body>
+            </html>"""
+        ]
+        result = {
+            "found_object": True
+        }
+        api_key = "mysecretapikey"
+        quandl = resources.Quandl(api_key)
+        for s in strings:
+            with self.subTest(msg=s):
+                self.assertEqual(quandl.save(str.encode(s, "utf-8")), result)
+
 if __name__ == "__main__":
     unittest.main()

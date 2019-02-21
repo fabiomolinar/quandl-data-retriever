@@ -5,11 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python Module",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceRoot}/quandl_data_retriever",
+            "console": "integratedTerminal",
+            "module": "quandl_data_retriever",
+            "cwd": "${workspaceRoot}",
+            "envFile": "${workspaceFolder}/env_files/.env"
+        },
+        {
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
             "program": "${file}",
-             "envFile": "${workspaceFolder}/env_files/.env"
+            "envFile": "${workspaceFolder}/env_files/.env"
         },
         {
             "name": "Python: Attach",

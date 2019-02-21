@@ -2,6 +2,7 @@
 import abc
 import urllib.parse
 import re
+import json
 
 class Resource(abc.ABC):
     @abc.abstractmethod
@@ -56,4 +57,8 @@ class Quandl(ForgeOne):
 
     @staticmethod
     def save(data):
+        data = re.search(r"<body[^{]*{(.*?)}.*\/body>", data.decode("utf-8").replace("\n",""))
+        if data:
+            data = json.loads("{" + data.group(1) + "}")
+            return data
         pass
