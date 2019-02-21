@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 twisted = {extras = ["tls"],version = "==18.9.0"}
+pymongo = "==3.7.2"
 
 [requires]
 python_version = "3.6.7"

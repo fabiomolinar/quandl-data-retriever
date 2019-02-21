@@ -59,6 +59,17 @@ class Quandl(ForgeOne):
     def save(data):
         data = re.search(r"<body[^{]*{(.*?)}.*\/body>", data.decode("utf-8").replace("\n",""))
         if data:
-            data = json.loads("{" + data.group(1) + "}")
+            try:
+                data = json.loads("{" + data.group(1) + "}")
+            except json.decoder.JSONDecodeError:
+                # Sometimes the API return the JSON without a } at the end
+                data = json.loads("{" + data.group(1) + "}}")
+            if len(data["dataset"]["data"]) == 0:
+                return
+            del data["dataset"]["description"]
+            del data["dataset"]["newest_available_date"]
+            del data["dataset"]["oldest_available_date"]
+            del data["dataset"]["frequency"]
+            del data["dataset"]["premium"]
+            del data["dataset"]["limit"]
             return data
-        pass
