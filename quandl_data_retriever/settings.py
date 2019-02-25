@@ -11,3 +11,5 @@ DEBUG = os.environ.get("DEBUG_MODE", "False") == "True"
 LOG_LEVEL = os.environ.get("LOG_LEVEL", 30)
 if DEBUG:
     LOG_LEVEL = logging.DEBUG
+
+MONGODB_NAME = os.environ.get("MONGO_INITDB_DATABASE", "test")

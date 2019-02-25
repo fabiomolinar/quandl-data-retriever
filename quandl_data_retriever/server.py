@@ -13,7 +13,6 @@ from twisted.web.client import Agent, readBody
 from . import settings
 from . import resources
 
-API_KEY = settings.QUANDL_API_KEY
 logger = logging.getLogger(settings.LOG_NAME + ".server")
 
 def main():

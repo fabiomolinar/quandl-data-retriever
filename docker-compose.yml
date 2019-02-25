@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  quandl:
+    build: .
+    image: quandl
+    container_name: quandl
+    env_file:
+      - ./env_files/.env
+    networks:
+      - mongodb_network
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:4.0.6
+    container_name: mongodb
+    env_file:
+      - ./env_files/.env
+    volumes:
+      - mongodb_volume:/data/db
+    networks:
+      - mongodb_network
+
+networks:
+  mongodb_network:
+    driver: bridge
+
+volumes:
+  mongodb_volume:
